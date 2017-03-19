@@ -1,5 +1,7 @@
 package com.theironyard;
 
+import java.util.Scanner;
+
 /**
  * As we move into writing more complex software we will begin to compose our
  * applications using many classes. Each class is dedicated to some purpose. The
@@ -57,18 +59,18 @@ public class Main {
          */
 
         // todo: Create a new instance of the Scanner class. It should read from System.in.
-
+        Scanner scanner = new Scanner(System.in);
 
         // todo: Configure the Scanner instance to use a newline (\n) character as its delimiter
-
+        scanner.useDelimiter("\n");
 
 
         // todo: Create a new instance of the ConversionService
-
+        ConversionService conversion = new ConversionService();
 
 
         // todo: Create a new instance of the MenuService. Pass the Scanner instance you created earlier into the MenuService's constructor
-
+        MenuService menu = new MenuService(scanner);
 
 
         /*
@@ -88,7 +90,7 @@ public class Main {
             returns a double number that we will be converting.
          */
         // todo: Invoke the MenuService's promptForWeight() method.
-
+        double weight = menu.promptForWeight();
 
 
         /*
@@ -101,11 +103,11 @@ public class Main {
             simpler.
          */
         // todo: Invoke the MenuService's promptForFromUnit() method.
-
+        Weight listFromUnit = menu.promptForFromUnit(conversion.listUnits());
 
 
         // todo: Invoke the MenuService's promptForToUnit() method.
-
+        Weight listToUnit = menu.promptForToUnit(conversion.listUnits());
 
 
         /*
@@ -117,7 +119,7 @@ public class Main {
             ConversionService's convert() method.
          */
         // todo: Invoke the ConversionService's convert() method.
-
+        double newConversion = conversion.convert(weight, listFromUnit, listToUnit);
 
 
         /*
@@ -127,8 +129,7 @@ public class Main {
             and end the program.
          */
         //todo: Print the answer using the MenuService's printAnswer() method
-
-
+        menu.printAnswer(weight, listFromUnit, newConversion, listToUnit);
 
     }
 
